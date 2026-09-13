@@ -1,221 +1,277 @@
+import json
 from pathlib import Path
 
 import torch
-from torch.utils.data import Dataset
 
+from torch.utils.data import Dataset
 from tokenizers import Tokenizer
 
 
-class LanguageModelDataset(Dataset):
+class PackedLanguageModelDataset(Dataset):
 
     def __init__(
         self,
-        text_path: str | Path,
-        tokenizer_path: str | Path,
-        seq_len: int = 1024,
-        add_bos: bool = True,
-        add_eos: bool = True,
+        jsonl_path,
+        tokenizer_path,
+        seq_len=512,
+        cache_path=None,
     ):
+
         super().__init__()
-
-        self.text_path = Path(
-            text_path
-        )
-
-        self.tokenizer_path = Path(
-            tokenizer_path
-        )
 
         self.seq_len = seq_len
 
+        self.jsonl_path = Path(
+            jsonl_path
+        )
+
         # ====================================================
-        # 文件检查
+        # 自动 cache 路径
         # ====================================================
 
-        if not self.text_path.exists():
+        if cache_path:
 
-            raise FileNotFoundError(
-                f"Text file not found: "
-                f"{self.text_path}"
+            self.cache_path = Path(
+                cache_path
             )
 
-        if not self.tokenizer_path.exists():
+        else:
 
-            raise FileNotFoundError(
-                f"Tokenizer not found: "
-                f"{self.tokenizer_path}"
-            )
-
-        # ====================================================
-        # 加载 Tokenizer
-        # ====================================================
-
-        self.tokenizer = (
-            Tokenizer.from_file(
-                str(
-                    self.tokenizer_path
+            self.cache_path = (
+                self.jsonl_path
+                .parent
+                /
+                "cache"
+                /
+                (
+                    self.jsonl_path.stem
+                    +
+                    "_tokens.pt"
                 )
             )
-        )
+
 
         # ====================================================
-        # Special Token ID
+        # Tokenizer
         # ====================================================
 
-        self.bos_token_id = (
-            self.tokenizer
-            .token_to_id(
-                "<bos>"
+        self.tokenizer = Tokenizer.from_file(
+            str(
+                tokenizer_path
             )
         )
 
-        self.eos_token_id = (
+
+        self.eos_id = (
             self.tokenizer
             .token_to_id(
                 "<eos>"
             )
         )
 
-        # ====================================================
-        # 读取文本
-        # ====================================================
 
-        text = (
-            self.text_path
-            .read_text(
-                encoding="utf-8"
+        self.bos_id = (
+            self.tokenizer
+            .token_to_id(
+                "<bos>"
             )
         )
 
-        if not text.strip():
+
+        if self.eos_id is None:
 
             raise ValueError(
-                "Training text is empty"
+                "Tokenizer missing <eos>"
             )
 
+
         # ====================================================
-        # Tokenize
+        # Token Cache
         # ====================================================
 
-        encoding = (
-            self.tokenizer
-            .encode(
-                text
+        if self.cache_path.exists():
+
+            print(
+                "Loading token cache:"
+            )
+
+            print(
+                self.cache_path
+            )
+
+            self.tokens = torch.load(
+                self.cache_path
+            )
+
+        else:
+
+            print(
+                "Building token cache..."
+            )
+
+            self.tokens = (
+                self.build_token_stream()
+            )
+
+
+            self.cache_path.parent.mkdir(
+                parents=True,
+                exist_ok=True,
+            )
+
+
+            torch.save(
+                self.tokens,
+                self.cache_path,
+            )
+
+
+            print(
+                "Saved token cache:"
+            )
+
+            print(
+                self.cache_path
+            )
+
+
+        # ====================================================
+        # Samples
+        # ====================================================
+
+        self.num_samples = (
+
+            (
+                len(
+                    self.tokens
+                )
+                -
+                1
+            )
+            //
+            self.seq_len
+
+        )
+
+
+        print(
+            "Total tokens:",
+            len(
+                self.tokens
             )
         )
 
-        token_ids = list(
-            encoding.ids
+
+        print(
+            "Samples:",
+            self.num_samples
         )
 
-        # ====================================================
-        # BOS / EOS
-        # ====================================================
 
-        if add_bos:
+    # ========================================================
+    # Build Token Stream
+    # ========================================================
 
-            if (
-                self.bos_token_id
-                is None
+    def build_token_stream(
+        self
+    ):
+
+        tokens = []
+
+
+        with self.jsonl_path.open(
+            encoding="utf-8"
+        ) as file:
+
+
+            for index, line in enumerate(
+                file
             ):
 
-                raise ValueError(
-                    "<bos> token not found"
+
+                if index % 500 == 0:
+
+                    print(
+                        f"Tokenizing {index}"
+                    )
+
+
+                item = json.loads(
+                    line
                 )
 
-            token_ids.insert(
-                0,
-                self.bos_token_id,
-            )
 
-        if add_eos:
-
-            if (
-                self.eos_token_id
-                is None
-            ):
-
-                raise ValueError(
-                    "<eos> token not found"
+                text = item.get(
+                    "text",
+                    "",
                 )
 
-            token_ids.append(
-                self.eos_token_id
-            )
 
-        # ====================================================
-        # 保存所有 Token
-        # ====================================================
+                if not text:
 
-        self.tokens = torch.tensor(
-            token_ids,
+                    continue
+
+
+                ids = (
+                    self.tokenizer
+                    .encode(
+                        text
+                    )
+                    .ids
+                )
+
+
+                # 文档 token
+
+                if (
+                    index == 0
+                    and
+                    self.bos_id is not None
+                ):
+
+                    tokens.append(
+                        self.bos_id
+                    )
+
+
+                tokens.extend(
+                    ids
+                )
+
+
+                # 文档结束
+
+                tokens.append(
+                    self.eos_id
+                )
+
+
+        return torch.tensor(
+            tokens,
             dtype=torch.long,
         )
 
-        # ====================================================
-        # 一个训练样本需要：
-        #
-        # seq_len + 1 个 Token
-        #
-        # 例如：
-        #
-        # 1025 Token
-        #
-        # Input:
-        # 前1024
-        #
-        # Target:
-        # 后1024
-        # ====================================================
 
-        self.chunk_size = (
-            self.seq_len + 1
-        )
-
-        # ====================================================
-        # 当前先采用“不重叠切块”
-        #
-        # 每次前进 seq_len
-        # ====================================================
-
-        usable_tokens = (
-            len(self.tokens)
-            - 1
-        )
-
-        self.num_samples = (
-            usable_tokens
-            //
-            self.seq_len
-        )
-
-        if self.num_samples <= 0:
-
-            raise ValueError(
-                "Corpus is too small. "
-                f"Need at least "
-                f"{self.seq_len + 1} tokens, "
-                f"but got {len(self.tokens)}."
-            )
+    # ========================================================
+    # Length
+    # ========================================================
 
     def __len__(
-        self,
-    ) -> int:
+        self
+    ):
 
         return self.num_samples
 
+
+    # ========================================================
+    # Get Item
+    # ========================================================
+
     def __getitem__(
         self,
-        index: int,
+        index,
     ):
 
-        # ====================================================
-        # 每个样本从：
-        #
-        # index * seq_len
-        #
-        # 开始
-        # ====================================================
 
         start = (
             index
@@ -223,52 +279,25 @@ class LanguageModelDataset(Dataset):
             self.seq_len
         )
 
-        end = (
-            start
-            +
-            self.chunk_size
-        )
 
         chunk = (
             self.tokens[
-                start:end
+                start:
+                start
+                +
+                self.seq_len
+                +
+                1
             ]
         )
 
-        # ====================================================
-        # 如果最后不足 seq_len + 1
-        # 不使用
-        # ====================================================
-
-        if (
-            len(chunk)
-            !=
-            self.chunk_size
-        ):
-
-            raise IndexError(
-                "Incomplete chunk"
-            )
-
-        # ====================================================
-        # Input
-        # ====================================================
-
-        input_ids = (
-            chunk[:-1]
-            .clone()
-        )
-
-        # ====================================================
-        # Target
-        # ====================================================
-
-        target_ids = (
-            chunk[1:]
-            .clone()
-        )
 
         return {
-            "input_ids": input_ids,
-            "target_ids": target_ids,
+
+            "input_ids":
+                chunk[:-1],
+
+            "target_ids":
+                chunk[1:],
+
         }
