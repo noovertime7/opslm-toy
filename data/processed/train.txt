@@ -1,0 +1,216 @@
+ip addr 可以查看网络接口和 IP 地址。
+kubectl delete pod nginx -n production
+kubectl describe pod 可以查看 Pod 的详细信息和事件。
+kubectl get statefulset -n production
+The production Kubernetes cluster runs critical workloads.
+available 通常比 free 更适合判断当前还有多少可用内存。
+子网掩码用于划分网络部分和主机部分。
+当系统发生故障时，工程师通常需要先确认现象，然后收集证据，再分析原因。
+DaemonSet 可以确保指定节点上运行一个 Pod。
+Production workloads should configure readiness probes.
+BF16 拥有和 FP32 相同的指数位宽，因此通常拥有更大的数值范围。
+Production metrics should be stored in the monitoring system.
+Startup Probe 可以用于启动时间较长的应用。
+vLLM 是一个面向大语言模型推理的开源系统。
+Production servers should be monitored continuously.
+Linux 中的进程是正在运行的程序实例。
+journalctl 可以查看 systemd 管理服务产生的日志。
+Mixed Precision 可以降低显存使用并提高部分 GPU 上的训练速度。
+kubectl logs nginx -n production
+INT8 和 INT4 是常见的量化精度。
+互联网中的设备通过 IP 地址进行寻址。
+kubectl get service -n production
+CSI 是 Kubernetes 中用于集成存储系统的标准接口。
+排查 CrashLoopBackOff 时应该先查看容器日志和 Pod Events。
+CUDA 是 NVIDIA 提供的并行计算平台。
+然后检查端口连通性。
+vmstat 可以观察 CPU、内存、进程和 IO 等系统指标。
+数据库用于存储和管理结构化数据。
+PyTorch 可以使用 CUDA 在 NVIDIA GPU 上执行张量计算。
+chmod 可以修改文件权限。
+持续集成和持续交付可以帮助团队更快地发布软件。
+NVIDIA GPU 广泛用于深度学习训练和推理。
+Data Parallel 会在多个 GPU 上复制模型，并处理不同的数据。
+StatefulSet 通常用于管理有状态应用。
+mpstat 可以查看 CPU 使用情况。
+通常应该先收集当前状态、日志和监控指标，避免丢失重要现场信息。
+使用 kill -9 之前应该确认普通终止方式是否无效。
+The production environment is used to run real user workloads.
+Readiness Probe 用于判断 Pod 是否可以接收流量。
+Production applications usually have stricter availability requirements.
+GPU 擅长执行大规模并行计算。
+traceroute 可以帮助观察网络路径。
+kubectl get configmap -n production
+Namespace 可以用于对 Kubernetes 资源进行逻辑隔离。
+Liveness Probe 用于检查容器是否仍然健康。
+ss 可以查看 TCP 和 UDP socket。
+SIGKILL 会直接终止进程，进程无法捕获该信号。
+日志是软件系统记录运行状态和事件的重要方式。
+top 命令可以实时观察系统负载和进程资源使用情况。
+TCP 是一种面向连接的可靠传输协议。
+LoadBalancer 通常用于与云平台负载均衡器结合。
+现代软件系统通常由多个组件组成，不同组件之间通过网络或者本地接口进行通信。
+Tensor Parallel 可以把单个模型层的计算分布到多个 GPU。
+ConfigMap 可以保存非敏感配置。
+kubectl get secret -n production
+高风险操作应该提前确认影响范围，并准备回滚方案。
+在 Kubernetes 中运行 GPU 工作负载时，需要通过设备插件让容器访问 GPU。
+AI Infra 是人工智能系统背后的基础设施工程。
+kubectl get nodes -n production
+Production systems require high availability and reliability.
+The production cluster contains services that handle real user traffic.
+操作系统负责管理计算机的处理器、内存、磁盘、网络和其他硬件资源。
+IPv6 地址长度为 128 位。
+抓包可以帮助分析 TCP 重传、连接建立和协议交互过程。
+kubectl get pods 可以查看 Pod。
+GPU Scheduler 可以根据 GPU 资源需求进行任务调度。
+Production alerts should provide enough information for troubleshooting.
+IP 地址用于标识网络中的设备。
+ps 命令可以查看系统中的进程。
+HTTP 502 通常表示网关从上游服务获得了无效响应。
+遇到 Kubernetes 故障时，应该结合 Pod 状态、Events、日志、节点状态和监控指标进行分析。
+Before deploying to production, changes should be tested in staging.
+Production services should avoid single points of failure.
+训练性能分析还需要关注显存、吞吐量、计算利用率和通信开销。
+systemctl status 可以查看服务状态。
+kubectl get pods -n production
+CNI 是 Kubernetes 中用于实现容器网络的标准接口。
+监控系统可以持续采集服务器和应用程序的运行指标。
+kubectl get daemonset -n production
+HTTPS 在 HTTP 基础上使用 TLS 提供加密通信。
+NodePort 可以通过节点端口暴露服务。
+磁盘 IO 问题通常需要关注吞吐量、IOPS、延迟和队列长度。
+Monitoring is especially important in the production environment.
+systemd 是现代 Linux 系统中常见的服务管理器。
+TCP 关闭连接通常涉及四次挥手。
+curl 可以用于测试 HTTP 服务。
+PCIe 也可以用于 GPU 与 CPU 或 GPU 之间的数据传输。
+SIGTERM 通常用于请求进程正常退出。
+每个进程通常拥有一个唯一的进程 ID，也就是 PID。
+kubectl get events -n production
+然后检查 DNS。
+DNS 负责将域名解析成 IP 地址。
+inode 耗尽也可能导致无法创建新的文件。
+系统性能问题可能来自 CPU、内存、磁盘、网络、应用程序或者外部依赖。
+DNS 故障可能表现为域名无法解析，但直接访问 IP 地址正常。
+Production logs should be collected centrally.
+软件开发通常包括需求分析、设计、开发、测试、发布和维护等阶段。
+在分布式系统中，网络延迟、节点故障和数据一致性都是重要问题。
+df 命令用于查看文件系统的磁盘空间使用情况。
+Production databases should be backed up regularly.
+systemctl start 可以启动服务。
+TCP 会通过序列号和确认机制保证数据可靠传输。
+limits 用于限制容器最多可以使用多少资源。
+Linux 中的文件权限通常由用户、用户组和其他用户三个部分组成。
+生产环境中的操作需要特别谨慎。
+Applications deployed to production should define resource requests and limits.
+tcpdump 可以抓取网络数据包。
+计算机是一种能够按照程序执行计算和信息处理的设备。
+ss -lntp 可以查看正在监听的 TCP 端口。
+Kubernetes 中的 PersistentVolume 用于描述持久化存储资源。
+如果磁盘空间耗尽，应用程序可能无法继续写入日志或数据。
+kubectl get deployment -n production
+Production incidents should be documented after recovery.
+消息队列可以在不同服务之间进行异步通信。
+NCCL 是 NVIDIA 提供的多 GPU 通信库。
+Linux 故障排查不应该一开始就重启服务器。
+PersistentVolumeClaim 是用户对存储资源的申请。
+Secret 通常用于保存密码、令牌和证书等敏感数据。
+kubectl top pods -n production
+UDP 不需要建立连接。
+Pipeline Parallel 可以把不同模型层分布到不同 GPU。
+kubectl get pods -A 可以查看所有 Namespace 中的 Pod。
+Production configuration changes should be recorded.
+如果容器或者进程因为内存不足被终止，应该进一步检查内存限制和实际内存使用情况。
+Pod 是 Kubernetes 中最小的可调度单位。
+路由表决定数据包应该通过哪个网络接口或者网关发送。
+因此不能简单根据 free 输出中的 used 数值判断系统是否缺少内存。
+HTTP 504 通常表示网关等待上游服务响应超时。
+Production workloads should configure liveness probes.
+systemctl stop 可以停止服务。
+域名系统 DNS 可以把域名转换成 IP 地址。
+NVLink 可以提供 GPU 之间的高速互联。
+Kubernetes 集群通常由控制平面节点和工作节点组成。
+缓存可以减少对后端数据库的访问，提高系统性能。
+OOMKilled 通常表示容器超过了内存限制或者节点出现严重内存压力。
+requests 用于告诉 Kubernetes 一个容器期望使用多少资源。
+客户端通常通过网络访问服务器提供的服务。
+Scheduler 会综合考虑资源请求、亲和性、污点和容忍等调度条件。
+free 命令可以查看系统内存使用情况。
+Production deployments should have a rollback strategy.
+网络故障排查应该避免只根据 ping 的结果判断所有网络功能是否正常。
+KV Cache 可以保存 Transformer 推理过程中已经计算过的 Key 和 Value。
+kubectl rollout status deployment nginx -n production
+然后检查路由。
+Service 可以为一组 Pod 提供稳定的访问入口。
+自动化是运维工作的核心能力之一。
+TCP 重传通常说明网络出现丢包、拥塞或者对端响应异常。
+curl 可以观察 HTTP 请求的响应状态。
+AllReduce 是分布式训练中常见的集合通信操作。
+告警系统通常根据监控指标、日志或者事件触发通知。
+lsof 可以查看进程打开的文件和网络连接。
+Kubernetes Scheduler 负责为尚未调度的 Pod 选择合适的节点。
+计算机网络允许不同设备之间交换数据。
+IPv4 地址长度为 32 位。
+ClusterIP 是 Kubernetes Service 的默认类型。
+Linux 中的 OOM Killer 会在系统严重缺少内存时终止部分进程。
+RDMA 可以让不同服务器之间进行低延迟、高吞吐的数据传输。
+如果 CPU limit 设置过低，容器可能出现 CPU throttling。
+GPU 利用率不能单独代表训练效率。
+systemctl restart 可以重新启动服务。
+Linux 会使用空闲内存作为文件缓存。
+FP16 和 BF16 都属于低精度浮点格式。
+Kubernetes 是一个用于自动部署、扩缩容和管理容器化应用的平台。
+kubectl describe pod nginx -n production
+Pod 出现 CrashLoopBackOff 时，通常表示容器启动后不断退出并重新启动。
+ImagePullBackOff 通常和镜像地址、认证信息或者网络问题有关。
+推理阶段通常不需要保存训练梯度。
+如果 memory limit 设置过低，容器可能因为 OOM 被终止。
+kubectl scale deployment nginx --replicas=3 -n production
+The production namespace contains critical applications.
+kubectl exec 可以进入容器执行命令。
+Production incidents should be investigated using logs, metrics, and traces.
+kubectl rollout restart deployment nginx -n production
+程序运行时需要使用 CPU、内存、磁盘和网络等系统资源。
+A production deployment should be observable and reversible.
+Pod 处于 Pending 状态时，可能是因为资源不足、调度限制或者存储问题。
+kubectl get ingress -n production
+排查网络问题时应该逐层缩小范围。
+服务器是一种长期运行并向其他设备提供服务的计算机。
+Always verify the impact before modifying a production system.
+大模型训练通常需要大量 GPU 计算资源。
+Deployment 用于管理无状态应用。
+ip route 可以查看系统路由表。
+uptime 可以查看系统运行时间和平均负载。
+负载均衡可以把请求分发到多个后端实例。
+Linux 是一种广泛使用的开源操作系统。
+kubectl get pvc -n production
+首先可以检查本机网络接口是否正常。
+TCP 建立连接通常需要三次握手。
+最后再检查应用层协议。
+分布式系统由多个独立节点共同完成计算任务。
+kill 可以向进程发送信号。
+Production traffic should be protected by proper security policies.
+dig 可以用于查询 DNS。
+df -i 可以查看文件系统 inode 的使用情况。
+基础设施即代码可以通过代码描述服务器、网络和其他基础设施资源。
+高可用系统通常需要避免单点故障。
+训练阶段需要保存梯度和优化器状态。
+训练大型模型时，显存不足是常见问题。
+减少 batch size 可以降低显存使用。
+Linux 内核负责进程调度、内存管理、文件系统、设备驱动和网络协议栈。
+ping 可以用于测试基本网络连通性。
+大模型推理和训练的资源需求不同。
+journalctl -u 可以查看指定服务的日志。
+Production Kubernetes workloads should use multiple replicas when appropriate.
+HTTP 是常见的应用层协议。
+随着上下文长度增加，KV Cache 会消耗更多显存。
+iptables 和 nftables 都可以用于配置 Linux 防火墙。
+GPU 虚拟化和共享技术可以提高 GPU 资源利用率。
+服务发现可以帮助应用找到其他服务的网络地址。
+故障排查应该尽量避免依赖猜测，而应该通过日志、指标和系统状态进行验证。
+一个 Pod 可以运行一个或者多个容器。
+防火墙规则配置错误可能导致服务无法访问。
+GPU 显存用于保存模型参数、激活值、梯度和优化器状态。
+Continuous Batching 可以提高推理服务的 GPU 利用率。
+默认网关用于访问本地网络之外的设备。

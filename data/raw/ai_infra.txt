@@ -1,0 +1,71 @@
+AI Infra 是人工智能系统背后的基础设施工程。
+
+大模型训练通常需要大量 GPU 计算资源。
+
+GPU 擅长执行大规模并行计算。
+
+NVIDIA GPU 广泛用于深度学习训练和推理。
+
+CUDA 是 NVIDIA 提供的并行计算平台。
+
+PyTorch 可以使用 CUDA 在 NVIDIA GPU 上执行张量计算。
+
+GPU 显存用于保存模型参数、激活值、梯度和优化器状态。
+
+训练大型模型时，显存不足是常见问题。
+
+减少 batch size 可以降低显存使用。
+
+Gradient Accumulation 可以通过多次累积梯度模拟更大的 batch size。
+
+Mixed Precision 可以降低显存使用并提高部分 GPU 上的训练速度。
+
+FP16 和 BF16 都属于低精度浮点格式。
+
+BF16 拥有和 FP32 相同的指数位宽，因此通常拥有更大的数值范围。
+
+Tensor Parallel 可以把单个模型层的计算分布到多个 GPU。
+
+Pipeline Parallel 可以把不同模型层分布到不同 GPU。
+
+Data Parallel 会在多个 GPU 上复制模型，并处理不同的数据。
+
+NCCL 是 NVIDIA 提供的多 GPU 通信库。
+
+AllReduce 是分布式训练中常见的集合通信操作。
+
+NVLink 可以提供 GPU 之间的高速互联。
+
+PCIe 也可以用于 GPU 与 CPU 或 GPU 之间的数据传输。
+
+RDMA 可以让不同服务器之间进行低延迟、高吞吐的数据传输。
+
+InfiniBand 是高性能计算环境中常见的高速网络技术。
+
+大模型推理和训练的资源需求不同。
+
+训练阶段需要保存梯度和优化器状态。
+
+推理阶段通常不需要保存训练梯度。
+
+KV Cache 可以保存 Transformer 推理过程中已经计算过的 Key 和 Value。
+
+随着上下文长度增加，KV Cache 会消耗更多显存。
+
+vLLM 是一个面向大语言模型推理的开源系统。
+
+Continuous Batching 可以提高推理服务的 GPU 利用率。
+
+模型量化可以降低模型存储和显存需求。
+
+INT8 和 INT4 是常见的量化精度。
+
+GPU 利用率不能单独代表训练效率。
+
+训练性能分析还需要关注显存、吞吐量、计算利用率和通信开销。
+
+在 Kubernetes 中运行 GPU 工作负载时，需要通过设备插件让容器访问 GPU。
+
+GPU Scheduler 可以根据 GPU 资源需求进行任务调度。
+
+GPU 虚拟化和共享技术可以提高 GPU 资源利用率。

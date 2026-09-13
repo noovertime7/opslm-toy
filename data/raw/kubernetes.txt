@@ -1,0 +1,79 @@
+Kubernetes 是一个用于自动部署、扩缩容和管理容器化应用的平台。
+
+Kubernetes 集群通常由控制平面节点和工作节点组成。
+
+Pod 是 Kubernetes 中最小的可调度单位。
+
+一个 Pod 可以运行一个或者多个容器。
+
+Deployment 用于管理无状态应用。
+
+StatefulSet 通常用于管理有状态应用。
+
+DaemonSet 可以确保指定节点上运行一个 Pod。
+
+Service 可以为一组 Pod 提供稳定的访问入口。
+
+ClusterIP 是 Kubernetes Service 的默认类型。
+
+NodePort 可以通过节点端口暴露服务。
+
+LoadBalancer 通常用于与云平台负载均衡器结合。
+
+Ingress 可以根据域名和路径转发 HTTP 请求。
+
+ConfigMap 可以保存非敏感配置。
+
+Secret 通常用于保存密码、令牌和证书等敏感数据。
+
+Namespace 可以用于对 Kubernetes 资源进行逻辑隔离。
+
+kubectl get pods 可以查看 Pod。
+
+kubectl get pods -A 可以查看所有 Namespace 中的 Pod。
+
+kubectl describe pod 可以查看 Pod 的详细信息和事件。
+
+kubectl logs 可以查看容器日志。
+
+kubectl exec 可以进入容器执行命令。
+
+Pod 处于 Pending 状态时，可能是因为资源不足、调度限制或者存储问题。
+
+Pod 出现 CrashLoopBackOff 时，通常表示容器启动后不断退出并重新启动。
+
+排查 CrashLoopBackOff 时应该先查看容器日志和 Pod Events。
+
+OOMKilled 通常表示容器超过了内存限制或者节点出现严重内存压力。
+
+ImagePullBackOff 通常和镜像地址、认证信息或者网络问题有关。
+
+Kubernetes Scheduler 负责为尚未调度的 Pod 选择合适的节点。
+
+Scheduler 会综合考虑资源请求、亲和性、污点和容忍等调度条件。
+
+requests 用于告诉 Kubernetes 一个容器期望使用多少资源。
+
+limits 用于限制容器最多可以使用多少资源。
+
+如果 CPU limit 设置过低，容器可能出现 CPU throttling。
+
+如果 memory limit 设置过低，容器可能因为 OOM 被终止。
+
+Liveness Probe 用于检查容器是否仍然健康。
+
+Readiness Probe 用于判断 Pod 是否可以接收流量。
+
+Startup Probe 可以用于启动时间较长的应用。
+
+Kubernetes 中的 PersistentVolume 用于描述持久化存储资源。
+
+PersistentVolumeClaim 是用户对存储资源的申请。
+
+CSI 是 Kubernetes 中用于集成存储系统的标准接口。
+
+CNI 是 Kubernetes 中用于实现容器网络的标准接口。
+
+生产环境中修改 Kubernetes 资源之前应该确认变更影响范围。
+
+遇到 Kubernetes 故障时，应该结合 Pod 状态、Events、日志、节点状态和监控指标进行分析。

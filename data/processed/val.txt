@@ -1,0 +1,24 @@
+UDP 是一种无连接的传输协议，通常用于对实时性要求较高的场景。
+htop 提供了更加直观的进程监控界面。
+Gradient Accumulation 可以通过多次累积梯度模拟更大的 batch size。
+kubectl logs 可以查看容器日志。
+生产环境中修改 Kubernetes 资源之前应该确认变更影响范围。
+Never restart a production service without understanding the impact.
+Production infrastructure should follow change management practices.
+chown 可以修改文件的所有者和所属用户组。
+Pods in the production namespace should be monitored carefully.
+TCP 是一种面向连接的传输协议，可以提供可靠的数据传输。
+du 命令可以统计目录和文件占用的空间。
+Changes to the production environment should be carefully reviewed.
+模型量化可以降低模型存储和显存需求。
+Ingress 可以根据域名和路径转发 HTTP 请求。
+load average 可以帮助判断系统当前的负载情况。
+dmesg 可以查看内核日志。
+InfiniBand 是高性能计算环境中常见的高速网络技术。
+iostat 可以用于分析磁盘 IO 性能。
+负载均衡器可以将请求分发到多个后端服务。
+Production failures can affect real users.
+nslookup 也可以进行 DNS 查询。
+HTTP 503 通常表示服务暂时不可用。
+一个好的故障排查过程通常从现象开始，逐步缩小问题范围。
+pidstat 可以观察不同进程的 CPU、内存和 IO 使用情况。

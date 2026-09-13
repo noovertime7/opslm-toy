@@ -1,0 +1,50 @@
+The production environment is used to run real user workloads.
+Changes to the production environment should be carefully reviewed.
+Always verify the impact before modifying a production system.
+Production incidents should be investigated using logs, metrics, and traces.
+The production cluster contains services that handle real user traffic.
+Never restart a production service without understanding the impact.
+Production deployments should have a rollback strategy.
+Monitoring is especially important in the production environment.
+Production systems require high availability and reliability.
+Production servers should be monitored continuously.
+The production Kubernetes cluster runs critical workloads.
+Production applications usually have stricter availability requirements.
+Before deploying to production, changes should be tested in staging.
+A production deployment should be observable and reversible.
+Production failures can affect real users.
+Production databases should be backed up regularly.
+Production configuration changes should be recorded.
+Production infrastructure should follow change management practices.
+Production alerts should provide enough information for troubleshooting.
+Production incidents should be documented after recovery.
+
+kubectl get pods -n production
+kubectl get deployment -n production
+kubectl get service -n production
+kubectl get nodes -n production
+kubectl get events -n production
+kubectl describe pod nginx -n production
+kubectl logs nginx -n production
+kubectl rollout status deployment nginx -n production
+kubectl rollout restart deployment nginx -n production
+kubectl scale deployment nginx --replicas=3 -n production
+kubectl delete pod nginx -n production
+kubectl top pods -n production
+kubectl get ingress -n production
+kubectl get configmap -n production
+kubectl get secret -n production
+kubectl get pvc -n production
+kubectl get statefulset -n production
+kubectl get daemonset -n production
+
+The production namespace contains critical applications.
+Pods in the production namespace should be monitored carefully.
+Applications deployed to production should define resource requests and limits.
+Production workloads should configure readiness probes.
+Production workloads should configure liveness probes.
+Production services should avoid single points of failure.
+Production Kubernetes workloads should use multiple replicas when appropriate.
+Production traffic should be protected by proper security policies.
+Production logs should be collected centrally.
+Production metrics should be stored in the monitoring system.
